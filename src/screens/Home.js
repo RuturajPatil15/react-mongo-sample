@@ -46,18 +46,14 @@ export default function Home() {
     }
 
     const getFetchData = async () => {
-        console.log("hello1")
         const response = await fetch("http://localhost:5000/ListAllData", {
             method: "get",
             headers: {
                 "Content-Type": "application/json"
             }
         })
-        console.log("hello2")
         const json = await response.json();
-        console.log("hello3")
         setItems(json.data);
-        console.log("hello4")
         // console.log(json.data)
     }
     useEffect(() => {
@@ -67,7 +63,6 @@ export default function Home() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("hello11")
         const response = await fetch("http://localhost:5000/createdata", {
             method: "POST",
             headers: {
@@ -75,26 +70,18 @@ export default function Home() {
             },
             body: JSON.stringify({ title: credentials.title, body: credentials.body, image: image?.url })
         })
-        console.log("hello22")
         const json = await response.json()
-        console.log("hello33")
         console.log(json);
-        console.log("hello44")
         if (json.success) {
-            console.log("hello55")
-            // getFetchData();
-            console.log("hello66")
             setAddSection(false)
-            console.log("hello77")
             alert(json.message)
-            console.log("hello88")
         } else {
             alert("Enter Valid Credentials")
         }
         console.log(JSON.stringify({ title: credentials.title, body: credentials.body, image: image?.url }))
         getFetchData();
         setcredentials({title: "", body: "", image: ""});
-
+        setImage("");
     }
 
     const handleUpdate = async (e) => {
@@ -186,7 +173,6 @@ export default function Home() {
                                         handleClose={() => { setAddSection(false) }}
                                         credentialsTitle={credentials.title}
                                         credentialsBody={credentials.body}
-                                        credentialsImage={credentials.image}
                                         onChange={onChange}
                                         handleImage={handleImage}
                                     />

@@ -12,7 +12,7 @@ import { LiaEditSolid } from "react-icons/lia";
 export default function listItem(props) {
     return (
         <div>
-            <List sx={{ width: '100%'}}>
+            <List >
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src={props.Image} />
