@@ -20,7 +20,7 @@ export default function Home() {
     const [image, setImage] = useState({});
     const [uploading, setUploading] = useState(false)
     const [credentials, setcredentials] = useState({ title: "", body: "", image: "" })
-    const [editCredentials, seteditCredentials] = useState({ title: "", body: "", image: "", _id: "" })
+    const [editCredentials, seteditCredentials] = useState({ _id: "", title: "", body: "", image: "" })
     const [addSection, setAddSection] = useState(false);
     const [editSection, setEditSection] = useState(false);
 
@@ -86,7 +86,12 @@ export default function Home() {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        const data = await axios.put("http://localhost:5000/updateData", editCredentials)
+        const data = await axios.put("http://localhost:5000/updateData", {
+            _id: editCredentials._id,
+            title: editCredentials.title,
+            body: editCredentials.body,
+            image: image?.url
+        })
         console.log(data)
         if (data.data.success) {
             getFetchData();
